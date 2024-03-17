@@ -4,16 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="150"
              x:Class="try2.Controls.Tumbler">
-	
-	<Grid>
-		<Button 
-			Height="150" Width="100" 
-			Click ="Button_Click" 
-			Background="Transparent"
-			CornerRadius="1"
-			
-				>
-			<Image x:Name="TumblerIcon" UseLayoutRounding="True" ></Image>
-		</Button>
-	</Grid>
+
+	<Button
+		Click ="Button_Click"
+		Background="Transparent">
+		<Image x:Name="TumblerIcon" ></Image>
+	</Button>
 </UserControl>

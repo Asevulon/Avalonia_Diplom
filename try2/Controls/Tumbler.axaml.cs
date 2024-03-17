@@ -33,7 +33,7 @@ namespace try2.Controls
         {
             InitializeComponent();
             OnImage = new Bitmap(AssetLoader.Open(new Uri("avares://try2/Assets/TumblerOn.png")));
-            OffImage = new Bitmap(AssetLoader.Open(new Uri("avares://try2/Assets/TumblerOff.png")));
+            OffImage = new Bitmap(AssetLoader.Open(new Uri("avares://try2/Assets/TumblerOff2.png")));
             IsChecked = false;
         }
 

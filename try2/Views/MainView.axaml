@@ -14,7 +14,7 @@
   </Design.DataContext>
 
 	<StackPanel Margin="20">
-		<controls:Tumbler x:Name="tumbler"></controls:Tumbler>
+		<controls:Tumbler x:Name="tumbler" Height="300" Width="200"></controls:Tumbler>
 		<TextBox x:Name="Tumblerstate" ></TextBox>
 		<Button Click="ClickHandler"> Проверить состояние</Button>
 	</StackPanel>
