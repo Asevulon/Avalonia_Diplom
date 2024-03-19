@@ -18,6 +18,8 @@
 	<StackPanel Margin="20">
 		<CheckBox Classes ="Tumbler" Width="100" IsChecked="{Binding CheckState}"></CheckBox>
 		<TextBlock Text="{Binding CheckState}"></TextBlock>
+		<CheckBox Classes ="Tumbler" Width="100" IsChecked="{Binding CheckState}"></CheckBox>
+
 	</StackPanel>
 
 </UserControl>
