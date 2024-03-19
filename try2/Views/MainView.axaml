@@ -5,18 +5,19 @@
              xmlns:vm="clr-namespace:try2.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="try2.Views.MainView"
-             x:DataType="vm:MainViewModel"
-			 xmlns:controls ="clr-namespace:try2.Controls">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+             x:DataType="vm:MainViewModel">
+	<UserControl.Styles>
+		<StyleInclude Source="/Controls/Tumbler.axaml"/>
+	</UserControl.Styles>
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
 
 	<StackPanel Margin="20">
-		<controls:Tumbler x:Name="tumbler" Height="300" Width="200"></controls:Tumbler>
-		<TextBox x:Name="Tumblerstate" ></TextBox>
-		<Button Click="ClickHandler"> Проверить состояние</Button>
+		<CheckBox Classes ="Tumbler" Width="100" IsChecked="{Binding CheckState}"></CheckBox>
+		<TextBlock Text="{Binding CheckState}"></TextBlock>
 	</StackPanel>
-	
+
 </UserControl>

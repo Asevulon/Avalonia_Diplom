@@ -9,12 +9,4 @@ public partial class MainView : UserControl
     {
         InitializeComponent();
     }
-    int counter = 0;
-    int counter2 = 0;
-    public void ClickHandler(object sender, RoutedEventArgs args)
-    {
-        Tumblerstate.Text = tumbler.IsChecked.ToString();
-    }
-
-  
 }
