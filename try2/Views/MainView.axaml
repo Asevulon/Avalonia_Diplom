@@ -6,20 +6,30 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="try2.Views.MainView"
              x:DataType="vm:MainViewModel">
-	<UserControl.Styles>
-		<StyleInclude Source="/Controls/Tumbler.axaml"/>
-	</UserControl.Styles>
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:MainViewModel />
 	</Design.DataContext>
 
-	<StackPanel Margin="20">
+	<StackPanel Margin="20" Width="200">
 		<CheckBox Classes ="Tumbler" Width="100" IsChecked="{Binding CheckState}"></CheckBox>
 		<TextBlock Text="{Binding CheckState}"></TextBlock>
-		<CheckBox Classes ="Tumbler" Width="100" IsChecked="{Binding CheckState}"></CheckBox>
-
+		<ProgressBar Classes="ArrowHead"
+						 Width="300"
+						 Minimum="0"
+						 Maximum="100"
+						 Value="{Binding SliderVal}"
+						 Foreground="Lime"
+						 ShowProgressText="True"
+						 Orientation="Horizontal"
+					 x:Name="PrgBar"
+						 />
+		<Slider Minimum="0"
+				Maximum="100"
+				Value="{Binding SliderVal}"
+				x:Name="Slider"
+				/>
 	</StackPanel>
 
 </UserControl>

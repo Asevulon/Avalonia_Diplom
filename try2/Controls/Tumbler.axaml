@@ -1,38 +1,115 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Design.PreviewWith>
-		<Border Padding="20">
+		<Border Margin="20">
 			<!-- Add Controls for Previewer Here -->
-			<CheckBox Classes ="Tumbler" Width="100"></CheckBox>
+			<CheckBox Classes ="Tumbler" Height="200" Width="200" IsChecked="True"></CheckBox>
 		</Border>
 	</Design.PreviewWith>
 
 	<!-- Add Styles Here -->
 	<Style Selector="CheckBox.Tumbler:checked">
-		<Setter Property="Width" Value="{Binding mWidth}"></Setter>
-		<Setter Property="Height" Value="{Binding mHeight}"></Setter>
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Grid>
-					<Image Width="{Binding mWidth}"
-						   Height="{Binding mHeight}"
-						   Source="/Assets/TumblerOn.png"
-					   />
-				</Grid>
+				<Viewbox Stretch="Uniform">
+					<Canvas Background="Transparent" Width="100" Height="160" >
+
+						<Ellipse
+							Fill="DimGray"
+							Height="100"
+							Width="100"
+							Canvas.Top="30"
+							/>
+						<Ellipse
+							Fill="DimGray"
+							Height="78"
+							Width="78"
+							Canvas.Top="41"
+							Canvas.Left="11"
+							Stroke="Lime"
+							StrokeThickness="6"
+							/>
+						<Ellipse
+							Fill="Silver"
+							Height="24"
+							Width="24"
+							Canvas.Top="68"
+							Canvas.Left="38"
+							/>
+						<Path Fill="Silver" Canvas.Left="45" Canvas.Top="80">
+							<Path.Data>
+								<PathGeometry>
+									<PathFigure StartPoint="0,0" IsClosed="True">
+										<QuadraticBezierSegment Point1="0,0" Point2="-3,-70" />
+										<QuadraticBezierSegment Point1="5,-75" Point2="13,-70" />
+										<QuadraticBezierSegment Point1="13,-65" Point2="10,0" />
+									</PathFigure>
+								</PathGeometry>
+							</Path.Data>
+						</Path>
+						<TextBlock
+							FontSize="12"
+							Canvas.Left="41.5"
+							Canvas.Top="14"
+							RenderTransform="rotate(-90deg)"
+							Foreground="Black"
+							>
+							On
+						</TextBlock>
+					</Canvas>
+				</Viewbox>
 			</ControlTemplate>
 		</Setter>
 	</Style>
 	<Style Selector="CheckBox.Tumbler:unchecked">
-		<Setter Property="Width" Value="{Binding mWidth}"></Setter>
-		<Setter Property="Height" Value="{Binding mHeight}"></Setter>
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Grid>
-					<Image Width="{Binding mWidth}"
-						   Height="{Binding mHeight}"
-						   Source="/Assets/TumblerOff.png"
-					   />
-				</Grid>
+				<Viewbox Stretch="Uniform">
+					<Canvas Background="Transparent" Width="100" Height="160" >
+						
+						<Ellipse
+							Fill="DimGray"
+							Height="100"
+							Width="100"
+							Canvas.Top="30"
+							/>
+						<Ellipse
+							Fill="DimGray"
+							Height="78"
+							Width="78"
+							Canvas.Top="41"
+							Canvas.Left="11"
+							Stroke="Red"
+							StrokeThickness="6"
+							/>
+						<Ellipse
+							Fill="Silver"
+							Height="24"
+							Width="24"
+							Canvas.Top="68"
+							Canvas.Left="38"
+							/>
+						<Path Fill="Silver" Canvas.Left="45" Canvas.Top="80">
+							<Path.Data>
+								<PathGeometry>
+									<PathFigure StartPoint="0,0" IsClosed="True">
+										<QuadraticBezierSegment Point1="0,0" Point2="-3,70" />
+										<QuadraticBezierSegment Point1="5,75" Point2="13,70" />
+										<QuadraticBezierSegment Point1="13,65" Point2="10,0" />
+									</PathFigure>
+								</PathGeometry>
+							</Path.Data>
+						</Path>
+						<TextBlock 
+							FontSize="12"
+							Canvas.Left="41.5"
+							Canvas.Top="130"
+							RenderTransform="rotate(-90deg)"
+							Foreground="Black"
+							>
+							Off</TextBlock>
+					</Canvas>
+				</Viewbox>
 			</ControlTemplate>
 		</Setter>
 	</Style>

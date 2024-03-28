@@ -16,6 +16,17 @@ public class MainViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
+    private double _SliderValProperty;
+    public double SliderVal
+    {
+        get { return _SliderValProperty; }
+        set
+        {
+            _SliderValProperty = value;
+            OnPropertyChanged(nameof(SliderVal));
+        }
+    }
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)
