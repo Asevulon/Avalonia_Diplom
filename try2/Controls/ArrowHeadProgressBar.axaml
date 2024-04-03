@@ -8,7 +8,7 @@
 						 Width="300" 
 						 Minimum="0"
 						 Maximum="100"
-						 Value="100"
+						 Value=""
 						 Foreground="Lime"
 						 ShowProgressText="True"
 						 Orientation="Horizontal"
@@ -19,11 +19,12 @@
     <!-- Add Styles Here -->
 	<Style Selector="ProgressBar.ArrowHead:horizontal">
 		<Style.Resources>
-			<conv:ValueToDegreesConverter x:Key="DegToValConverter" />
+			<conv:ValueToDegreesConverter x:Key="ValToDegConverter" />
 			<conv:ArrowHeadPointConverter x:Key="PointConv" />
 			<conv:ArrowHeadRadiusConverter x:Key="RadiusConv"/>
 			<conv:ColorIntensivityDecreaseConverter x:Key="ColorDecreaseConv"/>
 			<conv:DoubleToStringConverter x:Key="DoubleToStringConv"/>
+			<conv:ArrowPointsConverter x:Key="ArrowPointsConv"/>
 		</Style.Resources>
 		<Setter Property="Template">
 			<ControlTemplate>
@@ -55,6 +56,21 @@
 							</Path.Data>
 						</Path>
 
+						<Path 
+							Fill="{TemplateBinding Foreground,Converter={StaticResource ColorDecreaseConv}}" 
+							Canvas.Left="135" 
+							Canvas.Top="180">
+							<Path.Data>
+								<PathGeometry>
+									<PathFigure StartPoint="0,0" IsClosed="True">
+										<ArcSegment Point="30,0" RotationAngle="180"  Size="10,10"></ArcSegment>
+									</PathFigure>
+								</PathGeometry>
+							</Path.Data>
+						</Path>
+
+
+
 						<TextBlock
 							Text="{TemplateBinding Value,Converter={StaticResource DoubleToStringConv}}" 
 							Foreground="Black" 
@@ -62,51 +78,45 @@
 							Canvas.Top="18"
 							FontSize="18"
 							/>
-
 						
+						<Arc 
+							Width="284" 
+							Height="284"
+							StartAngle="180"
+							Stroke="{TemplateBinding Foreground, Converter={StaticResource ColorDecreaseConv}}"
+							StrokeThickness="2"
+							Canvas.Top="38"
+							Canvas.Left="8"
+							x:Name="mArc"
+							>
+							<Arc.SweepAngle>
+								<MultiBinding Converter="{StaticResource ValToDegConverter}" Mode="OneWay">
+									<Binding Path="$parent[ProgressBar].Value"/>
+									<Binding Path="$parent[ProgressBar].Minimum"/>
+									<Binding Path="$parent[ProgressBar].Maximum"/>
+								</MultiBinding>
+							</Arc.SweepAngle>
+							</Arc>
+						
+						<Polygon 
+							Fill="{TemplateBinding Foreground}"
+							Stroke="{TemplateBinding Foreground}"
+							StrokeThickness="2"
+							Canvas.Top="179"
+							Canvas.Left="8"
+							>
+							<Polygon.Points>
+								<MultiBinding Converter="{StaticResource ArrowPointsConv}">
+									<Binding Path="$parent[ProgressBar].Value"/>
+									<Binding Path="$parent[ProgressBar].Minimum"/>
+									<Binding Path="$parent[ProgressBar].Maximum"/>
+									<Binding Path="#mArc.Width"/>
+									<Binding Path="#mArc.Width"/>
+								</MultiBinding>
+							</Polygon.Points>
+							</Polygon>
 
-						<Border x:Name="PART_Indicator"
-								Canvas.Left="8"
-								Canvas.Top="8"
-								MinWidth="284"
-								MinHeight="172"
-								MaxWidth="284"
-								MaxHeight="172"
-								
-								>
-							<Grid Width="{Binding $parent.MinWidth}" Height="{Binding $parent.Height}">
-								<Path 
-									Fill="{TemplateBinding Foreground, Converter={StaticResource ColorDecreaseConv}}" 
-									VerticalAlignment="Bottom" 
-									HorizontalAlignment="Left" 
-									Stroke="{TemplateBinding Foreground}" 
-									StrokeThickness="5"
-									 
-									>
-									
-									<Path.Data>
-										<PathGeometry>
-											<PathFigure StartPoint="0,0" IsClosed="FALSE">
-												<ArcSegment IsLargeArc="False" 
-															Size="{Binding $parent[Border].MinWidth,
-															Converter={StaticResource RadiusConv}}">
-													<ArcSegment.Point>
-														<MultiBinding Converter="{StaticResource PointConv}" Mode="OneWay">
-															<Binding Path="$parent[ProgressBar].Value"/>
-															<Binding Path="$parent[ProgressBar].Minimum"/>
-															<Binding Path="$parent[ProgressBar].Maximum"/>
-															<Binding Path="$parent[Border].MinWidth"/>
-															<Binding Path="$parent[Border].MinWidth"/>
-														</MultiBinding>
-													</ArcSegment.Point>
-												</ArcSegment>
-												<LineSegment Point="142,0"/>
-											</PathFigure>
-										</PathGeometry>
-									</Path.Data>
-								</Path>
-							</Grid>
-						</Border>
+						<Border x:Name="PART_Indicator" Background="Transparent"/>
 					</Canvas>
 				</Viewbox>
 			</ControlTemplate>

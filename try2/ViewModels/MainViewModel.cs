@@ -16,7 +16,7 @@ public class MainViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    private double _SliderValProperty;
+    private double _SliderValProperty = 25;
     public double SliderVal
     {
         get { return _SliderValProperty; }
