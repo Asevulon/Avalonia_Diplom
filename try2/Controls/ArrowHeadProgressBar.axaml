@@ -41,10 +41,12 @@
 							/>
 						<Rectangle
 							Width="284"
-							Height="20"
+							Height="29"
 							Fill="DimGray"
 							Canvas.Top="172"
 							Canvas.Left="8"
+							RadiusX="20"
+							RadiusY="9"
 							/>
 						<Path Fill="Silver" Canvas.Left="8" Canvas.Top="180">
 							<Path.Data>

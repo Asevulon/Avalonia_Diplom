@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:try2.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="500"
+             mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="650"
              x:Class="try2.Views.MainView"
              x:DataType="vm:MainViewModel"
 			 >
@@ -12,30 +12,109 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:MainViewModel />
 	</Design.DataContext>
-		<Grid 
-			Width="{Binding $parent.Width}"
-			Height="{Binding $parent.Heigth}"
+	<StackPanel 
+		>
+		<Grid
+			Width="750"
+			Height="450"
 			>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="3*"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="3*"/>
+				<RowDefinition Height="3*"/>
+				<RowDefinition Height="5*"/>
 			</Grid.RowDefinitions>
 
-			<CheckBox Classes="Tumbler" IsChecked="{Binding msCheck}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-			<CheckBox Classes="Tumbler" IsChecked="{Binding fCheck}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-			<CheckBox Classes="Tumbler" IsChecked="{Binding nCheck}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"> Импульсный сигнал</TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"> Гармонический сигнал</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"> Шум</TextBlock>
 
-			<Slider Classes="Round" Value="{Binding msValue}" Grid.Column="0" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="-5" Maximum="5"/>
-			<Slider Classes="Round" Value="{Binding fValue}" Grid.Column="1" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="-5" Maximum="5"/>
-			<Slider Classes="Round" Value="{Binding nValue}" Grid.Column="2" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="0" Maximum="5"/>
-		
+			<CheckBox Classes="Tumbler" IsChecked="{Binding msCheck}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<CheckBox Classes="Tumbler" IsChecked="{Binding fCheck}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<CheckBox Classes="Tumbler" IsChecked="{Binding nCheck}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+			<Grid
+				Grid.Column="0"
+				Grid.Row="2"
+				ColumnDefinitions="*,*"
+				RowDefinitions="30,*"
+				>
+				<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Усиление</TextBlock>
+				<Slider Classes="Round" Value="{Binding msValue}" Grid.Column="0" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="-5" Maximum="5"/>
+
+				<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Период</TextBlock>
+				<Slider Classes="Round" Value="{Binding GaussAvg}" Grid.Column="1" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="0.15" Maximum="2"/>
+
+			</Grid>
+
+
+			<Grid
+				Grid.Column="1"
+				Grid.Row="2"
+				ColumnDefinitions="*,*"
+				RowDefinitions="30,*"
+				>
+				<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Усиление</TextBlock>
+				<Slider Classes="Round" Value="{Binding SinValue}" Grid.Column="0" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="-5" Maximum="5"/>
+
+				<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Частота</TextBlock>
+				<Slider Classes="Round" Value="{Binding fValue}" Grid.Column="1" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="0.15" Maximum="5"/>
+
+			</Grid>
+
+			<Grid 
+				Grid.Column="2" 
+				Grid.Row="2"
+				ColumnDefinitions="*,*"
+				RowDefinitions="30,*"
+				>
+				<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Усиление</TextBlock>
+				<Slider Classes="Round" Value="{Binding nValue}" Grid.Column="0" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="0" Maximum="5"/>
+
+				<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Задержка</TextBlock>
+				<Slider Classes="Round" Value="{Binding NoiseTimerElapse}" Grid.Column="1" Grid.Row="1" Background="DimGray" Foreground="White" Minimum="30" Maximum="300"/>
+
+			</Grid>
+
+
 			<ProgressBar Classes="ArrowHead"
+						 Grid.Column="0"
+						 Grid.Row="3"
+						 Foreground="Lime"
+						 Background="LemonChiffon"
+						 Minimum="-25"
+						 Maximum="25"
+						 Value="{Binding PureSignal}"
+						 Width="200"
+						 />
+			<ProgressBar Classes="ArrowHead"
+						 Grid.Column="1"
+						 Grid.Row="3"
+						 Foreground="Lime"
+						 Background="LemonChiffon"
+						 Minimum="-5"
+						 Maximum="5"
+						 Value="{Binding PureSinSignal}"
+						 Width="200"
+						 />
+			<ProgressBar Classes="ArrowHead"
+						 Grid.Column="2"
+						 Grid.Row="3"
+						 Foreground="Lime"
+						 Background="LemonChiffon"
+						 Minimum="-5"
+						 Maximum="5"
+						 Value="{Binding Noise}"
+						 Width="200"
+						 />
+
+		</Grid>
+		<ProgressBar Classes="ArrowHead"
 						 Grid.Column="3"
 						 Grid.Row="0"
 						 Foreground="Lime"
@@ -43,21 +122,9 @@
 						 Minimum="-30"
 						 Maximum="30"
 						 Value="{Binding Signal}"
-						 Width="350"
+						 Width="300"
 						 />
-
-			<ProgressBar Classes="ArrowHead"
-						 Grid.Column="3"
-						 Grid.Row="1"
-						 Foreground="Lime"
-						 Background="LemonChiffon"
-						 Minimum="-5"
-						 Maximum="5"
-						 Value="{Binding Noise}"
-						 Width="350"
-						 />
-			
-		</Grid>
+	</StackPanel>
 		
 
 
