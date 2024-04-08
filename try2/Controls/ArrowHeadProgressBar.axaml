@@ -6,7 +6,7 @@
             <!-- Add Controls for Previewer Here -->
 			<ProgressBar Classes="ArrowHead" 
 						 Width="300" 
-						 Minimum="0"
+						 Minimum="-20"
 						 Maximum="100"
 						 Value=""
 						 Foreground="Lime"
@@ -22,7 +22,7 @@
 			<conv:ValueToDegreesConverter x:Key="ValToDegConverter" />
 			<conv:ArrowHeadPointConverter x:Key="PointConv" />
 			<conv:ArrowHeadRadiusConverter x:Key="RadiusConv"/>
-			<conv:ColorIntensivityDecreaseConverter x:Key="ColorDecreaseConv"/>
+			<conv:ColorDecreaseSolidColorBrushConverter x:Key="ColorDecreaseConv"/>
 			<conv:DoubleToStringConverter x:Key="DoubleToStringConv"/>
 			<conv:ArrowPointsConverter x:Key="ArrowPointsConv"/>
 		</Style.Resources>
@@ -33,7 +33,7 @@
 						<Rectangle
 							Width="300"
 							Height="200"
-							Fill="LemonChiffon"
+							Fill="{TemplateBinding Background}"
 							RadiusX="20"
 							RadiusY="20"
 							Stroke="DimGray"

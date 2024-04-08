@@ -7,13 +7,13 @@ using Avalonia.Data.Converters;
 
 namespace try2.Converters
 {
-    public class ValueToDegreesConverter : IMultiValueConverter
+    public class RoundSliderTargetStartAngleConverter : IMultiValueConverter
     {
         public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
         {
-            if(values.Count!=3)
+            if (values.Count != 4)
             {
-                Trace.WriteLine("Exactly three values expected");
+                Trace.WriteLine("Exactly four values expected");
                 return BindingOperations.DoNothing;
             }
 
@@ -25,13 +25,14 @@ namespace try2.Converters
             double val = values[0] as double? ?? 0;
             double min = values[1] as double? ?? 0;
             double max = values[2] as double? ?? 0;
+            double sweep = values[3] as double? ?? 0;
 
             if (max - min == 0)
             {
                 return new BindingNotification(new DivideByZeroException("Don't do this!"), BindingErrorType.Error);
             }
-            double res = range * (val - min)/(max - min);
-            return res;
+            double res = range * (val - min) / (max - min);
+            return res - sweep / 2 + 90;
         }
     }
 }

@@ -1,0 +1,119 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:conv="using:try2.Converters">
+		
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+			<Slider Classes="Round"
+				Minimum="0" 
+				Maximum="100" 
+				Value="50" 
+				Width="100" 
+				Background="DimGray" 
+				Foreground="Lime"/>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+	<Style Selector="Slider.Round">
+		<Style.Resources>
+			<conv:DoubleToStringConverter x:Key="DoubleToStringConv"/>
+			<conv:ColorDecreaseSolidColorBrushConverter x:Key="ColorDecreaseConv"/>
+			<conv:ValueToDegreesConverter x:Key="ValToDegConverter" />
+			<conv:RoundSliderTargetStartAngleConverter x:Key="StartAngleConverter" />
+
+		</Style.Resources>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Viewbox Stretch="Uniform">
+					<Canvas Width="100" Height="100" Background="Transparent">
+
+						
+						<Ellipse
+							Width="100"
+							Height="100"
+							Fill="{TemplateBinding Background}"
+							Stroke="{TemplateBinding Background, Converter={StaticResource ColorDecreaseConv}}"
+							StrokeThickness="12"
+							/>
+
+						
+						<Arc 
+							Width="100"
+							Height="100"
+							StartAngle="90"
+							Stroke="{TemplateBinding Foreground, 
+							Converter={StaticResource ColorDecreaseConv},ConverterParameter=0.5 }"
+							StrokeThickness="12"
+							>
+							<Arc.SweepAngle>
+								<MultiBinding 
+									Converter="{StaticResource ValToDegConverter}" 
+									Mode="OneWay"
+									ConverterParameter="360"
+									>
+									<Binding Path="$parent[Slider].Value"/>
+									<Binding Path="$parent[Slider].Minimum"/>
+									<Binding Path="$parent[Slider].Maximum"/>
+								</MultiBinding>
+							</Arc.SweepAngle>
+							</Arc>
+
+
+						<Arc
+							Width="100"
+							Height="100"
+							Stroke="{TemplateBinding Foreground}"
+							StrokeThickness="12"
+							SweepAngle="10"
+							>
+							<Arc.StartAngle>
+								<MultiBinding
+									Converter="{StaticResource StartAngleConverter}"
+									ConverterParameter="360"
+									Mode="OneWay"
+									>
+									<Binding Path="$parent[Slider].Value"/>
+									<Binding Path="$parent[Slider].Minimum"/>
+									<Binding Path="$parent[Slider].Maximum"/>
+									<Binding Path="$self.SweepAngle"/>
+								</MultiBinding>
+							</Arc.StartAngle>
+						</Arc>
+
+
+						<Grid
+							Width="100"
+							Height="100"
+							>
+							<TextBlock 
+								Text="{TemplateBinding Value, Converter={StaticResource DoubleToStringConv}}"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"
+								/>
+							</Grid>
+						<Track x:Name="PART_Track"
+							Width="100" 
+							Height="100"
+							Opacity="0"
+							OpacityMask="Transparent"
+							   >
+							<Track.IncreaseButton>
+								<Button x:Name="PART_IncreaseButton"
+										Width="100"
+										Height="100"
+										/>
+							</Track.IncreaseButton>
+							<Track.DecreaseButton>
+								<Button x:Name="PART_DecreaseButton"
+										/>
+							</Track.DecreaseButton>
+						</Track>
+					</Canvas>
+					
+				</Viewbox>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

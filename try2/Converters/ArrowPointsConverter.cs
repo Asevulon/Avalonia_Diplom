@@ -37,7 +37,7 @@ namespace try2.Converters
                     height *= DecreaseCoeff;
                 }
             }
-            double rad = double.Pi * val / (max - min);
+            double rad = double.Pi * (val - min) / (max - min);
             double x = width / 2 - width * Math.Cos(rad) / 2;
             double y = height * Math.Sin(rad) / 2;
             Avalonia.Point p1 = new Avalonia.Point(142, 0);

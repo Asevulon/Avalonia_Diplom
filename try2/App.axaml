@@ -7,7 +7,9 @@
 	<Application.Styles>
 		<StyleInclude Source="/Controls/Tumbler.axaml"/>
 		<StyleInclude Source="/Controls/ArrowHeadProgressBar.axaml"/>
+		<StyleInclude Source="/Controls/RoundSlider.axaml"/>
         <FluentTheme />
+
     </Application.Styles>
 
 </Application>
